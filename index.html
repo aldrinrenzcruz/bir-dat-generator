@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BIR DAT GENERATOR</title>
+  <title>BIR .DAT Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="public/js/head.js"></script>
 </head>
@@ -85,7 +85,10 @@
       </div>
 
       <div class="p-4 border-t bg-white sticky bottom-0">
-        <button id="generate-preview-btn" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Generate Preview</button>
+        <div class="flex gap-4">
+          <button id="reset-btn" onclick="localStorage.clear(); location.reload();" class="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">Reset</button>
+          <button id="generate-preview-btn" class="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Preview</button>
+        </div>
       </div>
 
     </aside>
