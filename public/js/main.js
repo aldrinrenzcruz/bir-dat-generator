@@ -169,9 +169,9 @@ UI.generate_preview_btn.addEventListener("click", function () {
   let second_month_income = UI.second_month_income.value;
   let third_month_income = UI.third_month_income.value;
 
-  first_month_income ? UI.first_month_section.classList.remove("hidden") : UI.first_month_section.classList.add("hidden");
-  second_month_income ? UI.second_month_section.classList.remove("hidden") : UI.second_month_section.classList.add("hidden");
-  third_month_income ? UI.third_month_section.classList.remove("hidden") : UI.third_month_section.classList.add("hidden");
+  first_month_income > 0 ? UI.first_month_section.classList.remove("hidden") : UI.first_month_section.classList.add("hidden");
+  second_month_income > 0 ? UI.second_month_section.classList.remove("hidden") : UI.second_month_section.classList.add("hidden");
+  third_month_income > 0 ? UI.third_month_section.classList.remove("hidden") : UI.third_month_section.classList.add("hidden");
 
   UI.first_dat_file_name.innerHTML = `${tin_without_dashes}${first_month}${year}${form_name}.DAT`
   UI.first_dat_file_content.innerHTML =
