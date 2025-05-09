@@ -51,7 +51,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // Auto Format TIN Number
 document.addEventListener("DOMContentLoaded", function () {
-  UI.tin.addEventListener("input", formatTIN);
   UI.tin.addEventListener("paste", function (e) {
     setTimeout(formatTIN, 0);
   });
