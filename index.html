@@ -14,7 +14,7 @@
   <div class="flex min-h-screen">
     <aside class="w-full max-w-xs bg-white shadow-lg relative h-screen flex flex-col">
       <div class="p-6 overflow-y-auto flex-1">
-        <h2 class="text-xl font-semibold mb-4">BIR DAT GENERATOR</h2>
+        <h2 class="text-xl font-semibold mb-4">BIR .DAT Generator</h2>
         <div class="space-y-4">
 
           <div>
@@ -86,7 +86,7 @@
 
       <div class="p-4 border-t bg-white sticky bottom-0">
         <div class="flex gap-4">
-          <button id="reset-btn" onclick="localStorage.clear(); location.reload();" class="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">Reset</button>
+          <button id="reset-btn" onclick="confirmReset();" class="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">Reset</button>
           <button id="generate-preview-btn" class="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Preview</button>
         </div>
       </div>
@@ -96,47 +96,53 @@
     <main class="flex-1 p-8 space-y-8 overflow-y-auto h-screen">
       <h1 class="text-3xl font-bold text-gray-900">Preview</h1>
 
+      <!-- First month section -->
       <section class="space-y-2 hidden" id="first-month-section">
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">1st Month</h2>
+        <h2 class="text-xl font-semibold text-gray-800">1st Month .DAT File</h2>
+        <p id="first-dat-file-name" class="text-sm text-gray-500 font-mono"></p>
+        <div class="relative">
           <button
             onclick="downloadDAT('first-dat-file-name', 'first-dat-file-content')"
-            class="px-4 py-2 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            Download .DAT File
+            class="absolute top-4 right-4 px-4 py-2 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 z-10">
+            Download
           </button>
+          <pre id="first-dat-file-content" class="text-gray-800 whitespace-pre-wrap font-mono uppercase bg-gray-50 p-4 rounded border border-gray-400 overflow-auto"></pre>
         </div>
-        <p id="first-dat-file-name" class="text-sm text-gray-500 font-mono"></p>
-        <pre id="first-dat-file-content" class="text-gray-800 whitespace-pre-wrap font-mono uppercase bg-gray-50 p-4 rounded border border-gray-400 overflow-auto"></pre>
       </section>
 
+      <!-- Second month section -->
       <section class="space-y-2 hidden" id="second-month-section">
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">2nd Month</h2>
+        <h2 class="text-xl font-semibold text-gray-800">2nd Month .DAT File</h2>
+        <p id="second-dat-file-name" class="text-sm text-gray-500 font-mono"></p>
+        <div class="relative">
           <button
             onclick="downloadDAT('second-dat-file-name', 'second-dat-file-content')"
-            class="px-4 py-2 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            Download .DAT File
+            class="absolute top-4 right-4 px-4 py-2 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 z-10">
+            Download
           </button>
+          <pre id="second-dat-file-content" class="text-gray-800 whitespace-pre-wrap font-mono uppercase bg-gray-50 p-4 rounded border border-gray-400 overflow-auto"></pre>
         </div>
-        <p id="second-dat-file-name" class="text-sm text-gray-500 font-mono"></p>
-        <pre id="second-dat-file-content" class="text-gray-800 whitespace-pre-wrap font-mono uppercase bg-gray-50 p-4 rounded border border-gray-400 overflow-auto"></pre>
       </section>
 
+      <!-- Third month section -->
       <section class="space-y-2 hidden" id="third-month-section">
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">3rd Month</h2>
+        <h2 class="text-xl font-semibold text-gray-800">3rd Month .DAT File</h2>
+        <p id="third-dat-file-name" class="text-sm text-gray-500 font-mono"></p>
+        <div class="relative">
           <button
             onclick="downloadDAT('third-dat-file-name', 'third-dat-file-content')"
-            class="px-4 py-2 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            Download .DAT File
+            class="absolute top-4 right-4 px-4 py-2 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 z-10">
+            Download
           </button>
+          <pre id="third-dat-file-content" class="text-gray-800 whitespace-pre-wrap font-mono uppercase bg-gray-50 p-4 rounded border border-gray-400 overflow-auto"></pre>
         </div>
-        <p id="third-dat-file-name" class="text-sm text-gray-500 font-mono"></p>
-        <pre id="third-dat-file-content" class="text-gray-800 whitespace-pre-wrap font-mono uppercase bg-gray-50 p-4 rounded border border-gray-400 overflow-auto"></pre>
-        <br>
-        <p class="text-sm text-gray-800"><strong>To:</strong> esubmission@bir.gov.ph</p>
+      </section>
+
+      <section class="mt-4 hidden" id="email-template-section">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">Email Template</h2>
+        <p class="text-sm text-gray-800 mb-1"><strong>To:</strong> esubmission@bir.gov.ph</p>
         <div class="flex items-center justify-between">
-          <p id="third-email-subject" class="text-sm text-gray-800"></p>
+          <p id="third-email-subject" class="text-sm text-gray-800 mb-1"></p>
           <button class="text-sm text-blue-600 hover:underline hidden">Generate Email</button>
         </div>
         <pre id="third-email-content" class="text-gray-800 text-[14px] whitespace-pre-wrap bg-gray-50 p-4 rounded border border-gray-400 overflow-auto"></pre>

@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 UI.generate_preview_btn.addEventListener("click", function () {
 
   document.querySelectorAll("input").forEach(input => input.value = input.value.trim());
+  document.querySelector("#email-template-section").classList.remove("hidden");
 
   let tin_without_dashes = UI.tin.value.replaceAll("-", "");
   let actual_tin = tin_without_dashes.substring(0, 9);
