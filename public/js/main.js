@@ -81,7 +81,62 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+function validateRequiredFields() {
+  let requiredFields = ["first-name", "middle-name", "last-name", "registered-address", "tin", "rdo", "year"];
+  let allFieldsValid = true;
+  requiredFields.forEach(fieldId => {
+    const field = document.getElementById(fieldId);
+    if (!field.value.trim()) {
+      allFieldsValid = false;
+    }
+  });
+  const firstMonthIncome = UI.first_month_income.value.trim();
+  const secondMonthIncome = UI.second_month_income.value.trim();
+  const thirdMonthIncome = UI.third_month_income.value.trim();
+  if (!firstMonthIncome && !secondMonthIncome && !thirdMonthIncome) {
+    allFieldsValid = false;
+  }
+  return allFieldsValid;
+}
+
+function updatePreviewButtonState() {
+  if (validateRequiredFields()) {
+    UI.generate_preview_btn.disabled = false;
+    UI.generate_preview_btn.classList.remove("bg-blue-300", "cursor-not-allowed");
+    UI.generate_preview_btn.classList.add("bg-blue-600", "hover:bg-blue-700");
+  } else {
+    UI.generate_preview_btn.disabled = true;
+    UI.generate_preview_btn.classList.remove("bg-blue-600", "hover:bg-blue-700");
+    UI.generate_preview_btn.classList.add("bg-blue-300", "cursor-not-allowed");
+  }
+}
+
+// Add event listeners to all input fields to validate on input
+document.addEventListener("DOMContentLoaded", function () {
+  // Set initial button state
+  updatePreviewButtonState();
+
+  // Add input event listeners to all input fields
+  document.querySelectorAll("input, select").forEach(input => {
+    input.addEventListener("input", updatePreviewButtonState);
+    input.addEventListener("change", updatePreviewButtonState);
+  });
+
+  // Disable the button initially if validation fails
+  if (!validateRequiredFields()) {
+    UI.generate_preview_btn.disabled = true;
+    UI.generate_preview_btn.classList.remove("bg-blue-600", "hover:bg-blue-700");
+    UI.generate_preview_btn.classList.add("bg-blue-300", "cursor-not-allowed");
+  }
+});
+
 UI.generate_preview_btn.addEventListener("click", function () {
+
+  if (!validateRequiredFields()) {
+    event.preventDefault();
+    alert("Please fill in all required fields and at least one month's income.");
+    return;
+  }
 
   document.querySelectorAll("input").forEach(input => input.value = input.value.trim());
   document.querySelector("#email-template-section").classList.remove("hidden");
