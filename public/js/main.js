@@ -207,3 +207,12 @@ function downloadDAT(nameId, contentId) {
 function toTitleCase(str) {
   return str.replace(/\w\S*/g, word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
 }
+
+function confirmReset() {
+  const confirmResult = confirm("Are you sure you want to reset all data?");
+  if (confirmResult) {
+    localStorage.clear();
+    location.reload();
+    return true;
+  }
+}
