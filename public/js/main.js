@@ -19,14 +19,10 @@ const UI = {
   first_month_section: document.querySelector("#first-month-section"),
   first_dat_file_name: document.querySelector("#first-dat-file-name"),
   first_dat_file_content: document.querySelector("#first-dat-file-content"),
-  first_email_subject: document.querySelector("#first-email-subject"),
-  first_email_content: document.querySelector("#first-email-content"),
 
   second_month_section: document.querySelector("#second-month-section"),
   second_dat_file_name: document.querySelector("#second-dat-file-name"),
   second_dat_file_content: document.querySelector("#second-dat-file-content"),
-  second_email_subject: document.querySelector("#second-email-subject"),
-  second_email_content: document.querySelector("#second-email-content"),
 
   third_month_section: document.querySelector("#third-month-section"),
   third_dat_file_name: document.querySelector("#third-dat-file-name"),
@@ -128,36 +124,11 @@ UI.generate_preview_btn.addEventListener("click", function () {
 DSAWT,D1701Q,1,000352232,0000,"PHILIPPINE PORTS AUTHORITY",,,,${first_month}/${year},,WI010,5.00,${first_month_income},${tax_withheld}
 CSAWT,C1701Q,${actual_tin},0000,${first_month}/${year},${first_month_income},${tax_withheld}`;
 
-  UI.first_email_subject.innerHTML = `<strong>Subject:</strong> <span class="uppercase">SAWT ${form_name} ${actual_tin}, ${UI.rdo.value}, ${UI.last_name.value}, ${UI.first_name.value} ${UI.middle_name.value}, ${UI.quarter_filing.value} QUARTER OF ${year}</span>`;
-  UI.first_email_content.innerHTML =
-    `<div class="uppercase"><strong>TIN:</strong> ${UI.tin.value}
-<strong>NAME OF TAXPAYER:</strong> ${UI.last_name.value.toUpperCase()}, ${UI.first_name.value.toUpperCase()} ${UI.middle_name.value.toUpperCase()}
-<strong>REGISTERED ADDRESS:</strong> ${UI.registered_address.value}
-<strong>FORM TYPE:</strong> ${form_name}
-<strong>QUARTER FILING:</strong> ${UI.quarter_filing.value.toUpperCase()} QUARTER OF ${year}
-<strong>RDO:</strong> ${UI.rdo.value}
-</div>
-Best regards,
-${UI.first_name.value} ${UI.last_name.value}`;
-
-
   UI.second_dat_file_name.innerHTML = `${tin_without_dashes}${second_month}${year}${form_name}.DAT`
   UI.second_dat_file_content.innerHTML =
     `HSAWT,H1701Q,${actual_tin},0000,"","${UI.last_name.value.toUpperCase()}","${UI.first_name.value.toUpperCase()}","${UI.middle_name.value.toUpperCase()}",${second_month}/${year},${UI.rdo.value}
 DSAWT,D1701Q,1,000352232,0000,"PHILIPPINE PORTS AUTHORITY",,,,${second_month}/${year},,WI010,5.00,${second_month_income},${tax_withheld}
 CSAWT,C1701Q,${actual_tin},0000,${second_month}/${year},${second_month_income},${tax_withheld}`;
-
-  UI.second_email_subject.innerHTML = `<strong>Subject:</strong> <span class="uppercase">SAWT ${form_name} ${actual_tin}, ${UI.rdo.value}, ${UI.last_name.value}, ${UI.first_name.value} ${UI.middle_name.value}, ${UI.quarter_filing.value} QUARTER OF ${year}</span>`;
-  UI.second_email_content.innerHTML =
-    `<div class="uppercase"><strong>TIN:</strong> ${UI.tin.value}
-<strong>NAME OF TAXPAYER:</strong> ${UI.last_name.value.toUpperCase()}, ${UI.first_name.value.toUpperCase()} ${UI.middle_name.value.toUpperCase()}
-<strong>REGISTERED ADDRESS:</strong> ${UI.registered_address.value}
-<strong>FORM TYPE:</strong> ${form_name}
-<strong>QUARTER FILING:</strong> ${UI.quarter_filing.value.toUpperCase()} QUARTER OF ${year}
-<strong>RDO:</strong> ${UI.rdo.value}
-</div>
-Best regards,
-${UI.first_name.value} ${UI.last_name.value}`;
 
   UI.third_dat_file_name.innerHTML = `${tin_without_dashes}${third_month}${year}${form_name}.DAT`
   UI.third_dat_file_content.innerHTML =
