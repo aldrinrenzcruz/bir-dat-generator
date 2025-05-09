@@ -184,8 +184,6 @@ ${UI.first_name.value} ${UI.last_name.value}`;
       }
     }
   }
-
-  setTimeout(updateContentVisibility, 100);
 });
 
 function downloadDAT(nameId, contentId) {
