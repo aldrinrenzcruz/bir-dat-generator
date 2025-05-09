@@ -32,6 +32,19 @@ const UI = {
 
 // Auto Select Current Quarter
 window.addEventListener("DOMContentLoaded", () => {
+  const savableElements = document.querySelectorAll("[data-save-local='true']");
+  savableElements.forEach(el => {
+    const id = el.id;
+    if (!id) return;
+    const savedValue = localStorage.getItem(id);
+    if (savedValue !== null) {
+      el.value = savedValue;
+    }
+    el.addEventListener("input", () => {
+      localStorage.setItem(id, el.value);
+    });
+  });
+
   const quarterSelect = document.getElementById("quarter-filing");
   if (!quarterSelect) return;
   const month = new Date().getMonth();   // 0 = Jan, 11 = Dec
@@ -46,6 +59,8 @@ window.addEventListener("DOMContentLoaded", () => {
   if (UI.year.value === "") {
     UI.year.value = new Date().getFullYear();
   }
+
+  updatePreviewButtonState();
 });
 
 // Auto Format TIN Number
@@ -111,18 +126,12 @@ function updatePreviewButtonState() {
   }
 }
 
-// Add event listeners to all input fields to validate on input
 document.addEventListener("DOMContentLoaded", function () {
-  // Set initial button state
   updatePreviewButtonState();
-
-  // Add input event listeners to all input fields
   document.querySelectorAll("input, select").forEach(input => {
     input.addEventListener("input", updatePreviewButtonState);
     input.addEventListener("change", updatePreviewButtonState);
   });
-
-  // Disable the button initially if validation fails
   if (!validateRequiredFields()) {
     UI.generate_preview_btn.disabled = true;
     UI.generate_preview_btn.classList.remove("bg-blue-600", "hover:bg-blue-700");
@@ -131,13 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 UI.generate_preview_btn.addEventListener("click", function () {
-
-  if (!validateRequiredFields()) {
-    event.preventDefault();
-    alert("Please fill in all required fields and at least one month's income.");
-    return;
-  }
-
   document.querySelectorAll("input").forEach(input => input.value = input.value.trim());
   document.querySelector("#email-template-section").classList.remove("hidden");
 
