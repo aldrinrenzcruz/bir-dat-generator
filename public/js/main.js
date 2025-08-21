@@ -144,6 +144,11 @@ UI.generate_preview_btn.addEventListener("click", function () {
   document.querySelector("#email-template-section").classList.remove("hidden");
 
   let tin_without_dashes = UI.tin.value.replaceAll("-", "");
+  
+  // For filenames, use the full TIN (all 13 digits)
+  let filename_tin = tin_without_dashes;
+  
+  // For file content, use the truncated TIN (only significant digits)
   let actual_tin = tin_without_dashes.substring(0, 9);
   // Check if there are meaningful digits after position 9
   if (tin_without_dashes.length > 9) {
@@ -173,25 +178,26 @@ UI.generate_preview_btn.addEventListener("click", function () {
   second_month_income > 0 ? UI.second_month_section.classList.remove("hidden") : UI.second_month_section.classList.add("hidden");
   third_month_income > 0 ? UI.third_month_section.classList.remove("hidden") : UI.third_month_section.classList.add("hidden");
 
-  UI.first_dat_file_name.innerHTML = `${tin_without_dashes}${first_month}${year}${form_name}.DAT`
+  // Use filename_tin (full TIN) for filenames
+  UI.first_dat_file_name.innerHTML = `${filename_tin}${first_month}${year}${form_name}.DAT`
   UI.first_dat_file_content.innerHTML =
     `HSAWT,H1701Q,${actual_tin},0000,"","${UI.last_name.value.toUpperCase()}","${UI.first_name.value.toUpperCase()}","${UI.middle_name.value.toUpperCase()}",${first_month}/${year},${UI.rdo.value}
 DSAWT,D1701Q,1,000352232,0000,"PHILIPPINE PORTS AUTHORITY",,,,${first_month}/${year},,WI010,5.00,${first_month_income},${(first_month_income * 0.05).toFixed(2)}
 CSAWT,C1701Q,${actual_tin},0000,${first_month}/${year},${first_month_income},${(first_month_income * 0.05).toFixed(2)}`;
 
-  UI.second_dat_file_name.innerHTML = `${tin_without_dashes}${second_month}${year}${form_name}.DAT`
+  UI.second_dat_file_name.innerHTML = `${filename_tin}${second_month}${year}${form_name}.DAT`
   UI.second_dat_file_content.innerHTML =
     `HSAWT,H1701Q,${actual_tin},0000,"","${UI.last_name.value.toUpperCase()}","${UI.first_name.value.toUpperCase()}","${UI.middle_name.value.toUpperCase()}",${second_month}/${year},${UI.rdo.value}
 DSAWT,D1701Q,1,000352232,0000,"PHILIPPINE PORTS AUTHORITY",,,,${second_month}/${year},,WI010,5.00,${second_month_income},${(second_month_income * 0.05).toFixed(2)}
 CSAWT,C1701Q,${actual_tin},0000,${second_month}/${year},${second_month_income},${(second_month_income * 0.05).toFixed(2)}`;
 
-  UI.third_dat_file_name.innerHTML = `${tin_without_dashes}${third_month}${year}${form_name}.DAT`
+  UI.third_dat_file_name.innerHTML = `${filename_tin}${third_month}${year}${form_name}.DAT`
   UI.third_dat_file_content.innerHTML =
     `HSAWT,H1701Q,${actual_tin},0000,"","${UI.last_name.value.toUpperCase()}","${UI.first_name.value.toUpperCase()}","${UI.middle_name.value.toUpperCase()}",${third_month}/${year},${UI.rdo.value}
 DSAWT,D1701Q,1,000352232,0000,"PHILIPPINE PORTS AUTHORITY",,,,${third_month}/${year},,WI010,5.00,${third_month_income},${(third_month_income * 0.05).toFixed(2)}
 CSAWT,C1701Q,${actual_tin},0000,${third_month}/${year},${third_month_income},${(third_month_income * 0.05).toFixed(2)}`;
 
-  UI.third_email_subject.innerHTML = `<strong>Subject:</strong> <span class="uppercase">SAWT ${form_name} ${actual_tin}, ${UI.rdo.value}, ${UI.last_name.value}, ${UI.first_name.value} ${UI.middle_name.value}, ${UI.quarter_filing.value} QUARTER OF ${year}</span>`;
+  UI.third_email_subject.innerHTML = `<strong>Subject:</strong> <span class="uppercase">SAWT ${form_name} ${actual_tin}, ${UI.rdo.value}, ${UI.last_name.value.toUpperCase()}, ${UI.first_name.value.toUpperCase()} ${UI.middle_name.value.toUpperCase()}, ${UI.quarter_filing.value.toUpperCase()} QUARTER OF ${year}</span>`;
   UI.third_email_content.innerHTML =
     `<div class="uppercase"><strong>TIN:</strong> ${UI.tin.value}
 <strong>NAME OF TAXPAYER:</strong> ${UI.last_name.value.toUpperCase()}, ${UI.first_name.value.toUpperCase()} ${UI.middle_name.value.toUpperCase()}
